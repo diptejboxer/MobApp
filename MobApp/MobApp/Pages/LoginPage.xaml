@@ -14,11 +14,11 @@
                     <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email"   
                            PlaceholderColor="White" HeightRequest="50"   
                            Keyboard="Email"  
-                           TextColor="White"/>
+                           TextColor="Blue"/>
                     <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password"   
                            PlaceholderColor="White" HeightRequest="50"   
                            IsPassword="True"  
-                           TextColor="White"/>
+                           TextColor="Blue"/>
                 </StackLayout>
             </Frame>
             <Button Command="{Binding SubmitCommand}" Text="Login" TextColor="White"  

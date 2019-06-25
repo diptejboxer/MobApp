@@ -2,14 +2,19 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using MobApp.Services;
 
 namespace MobApp.ViewModels
 {
     public class LoginViewModel :INotifyPropertyChanged
     {
         public Action DisplayInvalidLoginPrompt;
+        public Action DisplayValidLoginPrompt;
+        public Action DisplayCatchError;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         private string email;
+        APICall api = new APICall();
+        
         public string Email
         {
             get { return email; }
@@ -34,12 +39,24 @@ namespace MobApp.ViewModels
         {
             SubmitCommand = new Command(OnSubmit);
         }
-        public void OnSubmit()
+        public async void OnSubmit()
         {
-            if (email != "diptej.thakkar@gmail.com" || password != "Parv@2018")
+            try
             {
-                DisplayInvalidLoginPrompt();
+                var i = await api.loginAsync(email, password);
+                if (Convert.ToInt32(i) == 1)
+                {
+                    DisplayValidLoginPrompt();
+                }
             }
+            catch
+            {
+                DisplayCatchError();
+            }
+            //if (email != "diptej.thakkar@gmail.com" || password != "Parv@2018")
+            //{
+            //    DisplayInvalidLoginPrompt();
+            //}
         }
     }
 }
