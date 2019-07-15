@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using MobApp.Services;
+using MobApp.Pages;
 
 namespace MobApp.ViewModels
 {
@@ -43,13 +44,16 @@ namespace MobApp.ViewModels
         {
             try
             {
+
+                
                 var i = await api.loginAsync(email, password);
                 if (Convert.ToInt32(i) == 1)
                 {
-                    DisplayValidLoginPrompt();
+                    App.Current.MainPage = new Master();
                 }
+
             }
-            catch
+            catch(Exception ex)
             {
                 DisplayCatchError();
             }
